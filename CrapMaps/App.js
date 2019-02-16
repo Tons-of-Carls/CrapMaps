@@ -50,12 +50,7 @@ export default class App extends Component<Props> {
 
 
     render() {
-
-
         return (
-          <View>
-            {this.state.inputView ?
-              <BathroomDataCollection/> :
             <View style={{width: "100%", height: "100%"}}>
               <MapView
                   style={{flex: 1}}
@@ -89,13 +84,10 @@ export default class App extends Component<Props> {
                 <MenuBar
                   sortCallback={()=>{}}
                   emergencyCallback={()=>{}}
-                  addCallback={()=>{this.setState({inputView: true})}
-                  }/> :
+                  addCallback={()=>{}}/> :
                 <MarkerData/>}
 
             </View>
-            }
-          </View>
         );
     }
 }
