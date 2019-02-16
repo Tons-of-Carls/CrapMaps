@@ -1,8 +1,8 @@
-## Welcome to GitHub Pages
+## Welcome to CrapMaps
 
-You can use the [editor on GitHub](https://github.com/Skammerman99/CrapMaps/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+CrapMaps is an innovative solution to the universal problem that arose from the phenomena of public bathrooms: worry.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+When you go to a public bathroom, you could be in discomfort in a place made to comfort you! Sometimes parents may need to change a diaper
 
 ### Markdown
 
