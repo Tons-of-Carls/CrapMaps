@@ -7,6 +7,8 @@ import StarRating from 'react-native-star-rating';
 import CMButton from "./src/CMButton"
 import MenuBar from "./src/MenuBar"
 import MarkerData from "./src/MarkerData";
+import "firebase"
+import * as firebase from "firebase";
 
 export default class App extends Component<Props> {
 
@@ -15,6 +17,17 @@ export default class App extends Component<Props> {
     this.state = {
       markerView:false
     }
+
+
+    let config = {
+      apiKey: "AIzaSyAu3t1RP8eCeDyLex1nUnOgLuxevRLC1Xc",
+      authDomain: "crapmapsfb.firebaseapp.com",
+      databaseURL: "https://crapmapsfb.firebaseio.com",
+      projectId: "crapmapsfb",
+      storageBucket: "crapmapsfb.appspot.com",
+      messagingSenderId: "181590936130"
+    };
+    firebase.initializeApp(config);
   }
 
 
