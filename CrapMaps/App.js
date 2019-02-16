@@ -7,6 +7,8 @@ import StarRating from 'react-native-star-rating';
 import CMButton from "./src/CMButton"
 import MenuBar from "./src/MenuBar"
 import MarkerData from "./src/MarkerData";
+import BathroomDataCollection from "./src/BathroomDataCollection"
+
 import "firebase"
 import * as firebase from "firebase";
 
@@ -16,7 +18,9 @@ export default class App extends Component<Props> {
     super(props)
     this.state = {
       markerView:false,
-        currentPos:[0,0]
+      inputView: false,
+      currentPos:[0,0],
+      locations: []
     };
     this.updateUserLocation();
 
@@ -29,6 +33,11 @@ export default class App extends Component<Props> {
       messagingSenderId: "181590936130"
     };
     firebase.initializeApp(config);
+
+    firebase.database().ref("locations/").once("value").then((snapshot)=>{
+      console.log();
+      this.setState({locations: Object.values(snapshot.toJSON())})
+    })
   }
 
     updateUserLocation(){
@@ -41,45 +50,51 @@ export default class App extends Component<Props> {
 
 
     render() {
+
+
         return (
-          <View style={{width: "100%", height: "100%"}}>
-            <MapView
-                style={{flex: 1}}
-                region={{
-                    latitude: this.state.currentPos[0],
-                    longitude: this.state.currentPos[1],
-                    latitudeDelta: 0.004,
-                    longitudeDelta: 0.004
-                }}
-                showsUserLocation={true}
-                onPress={(newCoords)=>{
-                  this.setState({markerView: false,currentPos:[newCoords.coordinate.latitude, newCoords.coordinate.longitude]})
-                }}
-            >
-              <Marker
-                coordinate={{
-                  latitude: 33.6405,
-                  longitude: -117.8443
-                }}
-                onPress={(event)=>{
-                    this.setState({markerView: true,currentPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
-                }}
-              />
+          <View>
+            {this.state.inputView ?
+              <BathroomDataCollection/> :
+            <View style={{width: "100%", height: "100%"}}>
+              <MapView
+                  style={{flex: 1}}
+                  region={{
+                      latitude: this.state.currentPos[0],
+                      longitude: this.state.currentPos[1],
+                      latitudeDelta: 0.004,
+                      longitudeDelta: 0.004
+                  }}
+                  showsUserLocation={true}
+                  onPress={(newCoords)=>{
+                    this.setState({markerView: false})
+                  }}
+              >
 
-              <Marker
-                coordinate={{
-                  latitude: 33.6400,
-                  longitude: -117.8440
-                }}
-                onPress={(event)=>{
-                    this.setState({markerView: true,currentPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
-                }}
-              />
+                {this.state.locations.map((markerInfo)=>(
+                  <Marker
+                    coordinate={{
+                      latitude: markerInfo.lat,
+                      longitude: markerInfo.long
+                    }}
+                    onPress={(event)=>{
+                      this.setState({markerView: true,currentPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
+                    }}
+                  />
+                ))}
 
-            </MapView>
+              </MapView>
 
-            {!this.state.markerView ? <MenuBar/> : <MarkerData/>}
+              {!this.state.markerView ?
+                <MenuBar
+                  sortCallback={()=>{}}
+                  emergencyCallback={()=>{}}
+                  addCallback={()=>{this.setState({inputView: true})}
+                  }/> :
+                <MarkerData/>}
 
+            </View>
+            }
           </View>
         );
     }
