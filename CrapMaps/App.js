@@ -13,9 +13,20 @@ export default class App extends Component<Props> {
   constructor(props){
     super(props)
     this.state = {
-      markerView:false
-    }
+      markerView:false,
+        currentPos:[0,0]
+    };
+    this.updateUserLocation();
+
   }
+
+    updateUserLocation(){
+        navigator.geolocation.getCurrentPosition((pos)=>{
+            this.setState({currentPos:[pos.coords.latitude, pos.coords.longitude]})
+        })
+
+    }
+
 
 
     render() {
@@ -24,14 +35,14 @@ export default class App extends Component<Props> {
             <MapView
                 style={{flex: 1}}
                 region={{
-                    latitude: 33.6405,
-                    longitude: -117.8443,
+                    latitude: this.state.currentPos[0],
+                    longitude: this.state.currentPos[1],
                     latitudeDelta: 0.004,
                     longitudeDelta: 0.004
                 }}
                 showsUserLocation={true}
-                onPress={()=>{
-                  this.setState({markerView: false})
+                onPress={(newCoords)=>{
+                  this.setState({markerView: false,currentPos:[newCoords.coordinate.latitude, newCoords.coordinate.longitude]})
                 }}
             >
               <Marker
@@ -39,8 +50,8 @@ export default class App extends Component<Props> {
                   latitude: 33.6405,
                   longitude: -117.8443
                 }}
-                onPress={()=>{
-                  this.setState({markerView: true})
+                onPress={(event)=>{
+                    this.setState({markerView: true,currentPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
                 }}
               />
 
@@ -49,8 +60,8 @@ export default class App extends Component<Props> {
                   latitude: 33.6400,
                   longitude: -117.8440
                 }}
-                onPress={()=>{
-                  this.setState({markerView: true})
+                onPress={(event)=>{
+                    this.setState({markerView: true,currentPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
                 }}
               />
 
@@ -67,4 +78,4 @@ export default class App extends Component<Props> {
 
 
 // skip this line if using Create React Native App
-AppRegistry.registerComponent('AwesomeProject', () => LotsOfGreetings);
+//AppRegistry.registerComponent('AwesomeProject', () => LotsOfGreetings);
