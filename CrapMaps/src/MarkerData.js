@@ -42,11 +42,22 @@ export default class MarkerData extends Component{
         containerStyle={{justifyContent: "center"}}
       />
 
-      <CMButton
-        title="Details"
-        verticallyAlone={false}
-        bgColor="#546E7A"
-      />
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent:"space-around"
+          }}>
+          <CMButton
+            title="Add review"
+            verticallyAlone={true}
+            bgColor="#546E7A"
+          />
+          <CMButton
+            title="Details"
+            verticallyAlone={true}
+            bgColor="#546E7A"
+          />
+        </View>
 
     </View>
     )

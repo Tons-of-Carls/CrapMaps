@@ -34,7 +34,7 @@ export default class App extends Component<Props> {
     };
     firebase.initializeApp(config);
 
-    firebase.database().ref("locations/").once("value").then((snapshot)=>{
+    firebase.database().ref("Locations/").once("value").then((snapshot)=>{
       console.log();
       this.setState({locations: Object.values(snapshot.toJSON())})
     })
@@ -97,8 +97,8 @@ export default class App extends Component<Props> {
                 {this.state.locations.map((markerInfo)=>(
                   <Marker
                     coordinate={{
-                      latitude: markerInfo.lat,
-                      longitude: markerInfo.long
+                      latitude: markerInfo.latitude,
+                      longitude: markerInfo.longitude
                     }}
                     onPress={(event)=>{
                       this.setState({markerView: true,currentPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
