@@ -53,7 +53,7 @@ export default class App extends Component<Props> {
                 }}
                 showsUserLocation={true}
                 onPress={(newCoords)=>{
-                  this.setState({markerView: false,currentPos:[newCoords.coordinate.latitude, newCoords.coordinate.longitude]})
+                  this.setState({markerView: false})
                 }}
             >
               <Marker
