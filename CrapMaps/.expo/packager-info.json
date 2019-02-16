@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19003,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 23464,
-  "expoServerNgrokUrl": "https://jx-khf.anonymous.crapmaps.exp.direct",
-  "packagerNgrokUrl": "https://packager.jx-khf.anonymous.crapmaps.exp.direct",
-  "ngrokPid": 10516
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }
