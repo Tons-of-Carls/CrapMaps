@@ -53,7 +53,7 @@ export default class App extends Component<Props> {
     }
 
     findClosest(listo){
-
+        this.updateUserLocation();
         var i;
         var min = -1;
         var closest;
