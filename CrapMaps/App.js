@@ -1,3 +1,6 @@
+import "firebase"
+import * as firebase from "firebase";
+
 import React, { Component } from 'react';
 import { AppRegistry, Text, View, TouchableWithoutFeedback, Button } from 'react-native';
 
@@ -9,8 +12,15 @@ import MenuBar from "./src/MenuBar"
 import MarkerData from "./src/MarkerData";
 
 
-import "firebase"
-import * as firebase from "firebase";
+let config = {
+  apiKey: "AIzaSyAu3t1RP8eCeDyLex1nUnOgLuxevRLC1Xc",
+  authDomain: "crapmapsfb.firebaseapp.com",
+  databaseURL: "https://crapmapsfb.firebaseio.com",
+  projectId: "crapmapsfb",
+  storageBucket: "crapmapsfb.appspot.com",
+  messagingSenderId: "181590936130"
+};
+firebase.initializeApp(config);
 
 export default class App extends Component<Props> {
 
@@ -23,15 +33,7 @@ export default class App extends Component<Props> {
     };
     this.updateUserLocation();
 
-    let config = {
-      apiKey: "AIzaSyAu3t1RP8eCeDyLex1nUnOgLuxevRLC1Xc",
-      authDomain: "crapmapsfb.firebaseapp.com",
-      databaseURL: "https://crapmapsfb.firebaseio.com",
-      projectId: "crapmapsfb",
-      storageBucket: "crapmapsfb.appspot.com",
-      messagingSenderId: "181590936130"
-    };
-    firebase.initializeApp(config);
+
 
     firebase.database().ref("Locations/").once("value").then((snapshot)=>{
       console.log();
@@ -114,6 +116,7 @@ export default class App extends Component<Props> {
                   addCallback={()=>{}}/> :
                 <MarkerData
                   locationData={this.state.locations[this.state.markerView]}
+                  index={this.state.markerView}
                 />}
 
             </View>

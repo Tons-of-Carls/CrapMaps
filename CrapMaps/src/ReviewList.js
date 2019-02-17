@@ -3,9 +3,9 @@ import React, { Component } from "react";
 
 export default class ReviewList extends Component{
   render(){
-    <FlatList
-      data={this.props.reviews}
-      renderItem={(item)=>(<View/>)}
-    />
+    return (<FlatList
+      data={this.props.data}
+      renderItem={(item)=>(<View review={item}/>)}
+    />);
   }
 }

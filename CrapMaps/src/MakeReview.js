@@ -1,7 +1,11 @@
 import {Text, View, TextInput} from "react-native";
 import StarRating from "react-native-star-rating";
-
+import CMButton from "./CMButton"
 import React, { Component } from "react";
+
+import * as firebase from "firebase";
+
+
 
 export default class MakeReview extends Component{
 
@@ -12,7 +16,7 @@ export default class MakeReview extends Component{
       location: [0,0],
       rating: 0,
       review: ""
-    }
+    };
     navigator.geolocation.getCurrentPosition((pos)=>{
       this.setState({location:[pos.coords.latitude, pos.coords.longitude]})
     })
@@ -48,11 +52,29 @@ export default class MakeReview extends Component{
         />
 
         <TextInput
+          style={{width:"90%", borderBottomColor: "#78909C", borderBottomWidth: 1}}
           onChangeText={(val)=>{
             this.setState({review: val});
           }}
           value={this.state.review}
           multiline={true}
+        />
+
+        <CMButton
+          title="Submit"
+          verticallyAlone={false}
+          bgColor="#546E7A"
+          onPress={()=>{
+            firebase.database().ref("Locations/"+this.props.data.parent + "/reviews/" + String(this.props.index + 1)).set({
+              review: this.state.review,
+              stars: this.state.rating
+            });
+
+            firebase.database().ref("Locations/"+this.props.data.parent).set({
+              rating: (this.props.data.rating*this.props.data.size+this.state.rating)/(this.props.data.size+1),
+              size: this.props.data.size+1
+            });
+          }}
         />
 
       </View>
