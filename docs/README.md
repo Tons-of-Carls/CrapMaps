@@ -3,7 +3,7 @@
 CrapMaps is an innovative application that will show you nearby restrooms and eliminate the last minute panic of finding somewhere to relieve yourself.
 
 
-![The Wildcard](./joker.jpg)
+![Map](./map.jpg)  ![Deets](./fastdetails.jpg)  ![Review](./leavereview.jpg)
 
 ### Main Features
 
@@ -16,4 +16,9 @@ CrapMaps is an innovative application that will show you nearby restrooms and el
 * Add new locations to our database
 
 * Find the closest restroom
+
+
+# Learn more on our DevPost!
+[DevPost](https://devpost.com/software/crapmaps)
+
 

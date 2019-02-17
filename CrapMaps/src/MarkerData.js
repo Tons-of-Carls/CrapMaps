@@ -21,7 +21,7 @@ export default class MarkerData extends Component{
 
   mainV(){
     return (
-      <KeyboardAvoidingView
+      <View
         style={{
           width:"100%",
           height:"100%",
@@ -76,7 +76,7 @@ export default class MarkerData extends Component{
           />
         </View>
 
-      </KeyboardAvoidingView >
+      </View >
     )
   }
 
@@ -86,9 +86,10 @@ export default class MarkerData extends Component{
         style={{
           width: "100%",
           height: "40%",
+
         }}
       >
-        {this.state.mainView ? this.mainV() : (this.state.reviewView ? <ReviewList data={Object.values(this.props.locationData.reviews)}/> : <MakeReview index={Object.values(this.props.locationData.reviews).length} data={this.props.locationData}/> )}
+        {this.state.mainView ? this.mainV() : (this.state.reviewView ? <ReviewList data={Object.values(this.props.locationData.reviews)}/> : <MakeReview closeCallback={this.props.closeCallback} index={Object.values(this.props.locationData.reviews).length} data={this.props.locationData}/> )}
       </View>
     )
   }

@@ -12,14 +12,9 @@ export default class MakeReview extends Component{
   constructor(props){
     super(props);
     this.state = {
-      name: "",
-      location: [0,0],
       rating: 0,
       review: ""
     };
-    navigator.geolocation.getCurrentPosition((pos)=>{
-      this.setState({location:[pos.coords.latitude, pos.coords.longitude]})
-    })
   }
 
   render() {
@@ -75,6 +70,12 @@ export default class MakeReview extends Component{
             updates["Locations/"+this.props.data.parent+"/size"] = this.props.data.size+1
 
             firebase.database().ref().update(updates);
+
+            this.setState({
+              rating: 0,
+              review: ""
+            });
+            this.props.closeCallback();
           }}
         />
 

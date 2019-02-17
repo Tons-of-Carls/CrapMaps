@@ -111,6 +111,7 @@ export default class App extends Component<Props> {
                       latitude: markerInfo.latitude,
                       longitude: markerInfo.longitude
                     }}
+
                     onPress={(event)=>{
                       this.setState({markerView: index,viewPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
                     }}
@@ -143,6 +144,7 @@ export default class App extends Component<Props> {
                 <MarkerData
                   locationData={this.state.locations[this.state.markerView]}
                   index={this.state.markerView}
+                  closeCallback={()=>{this.setState({markerView: -1})}}
                 />}
 
             </View>
