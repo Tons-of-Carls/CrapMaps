@@ -30,8 +30,8 @@ export default class App extends Component<Props> {
     super(props)
     this.state = {
       markerView:-1,
-      viewPos:[0,0],
-      userPos:[0,0],
+      viewPos:[33.649459199999995,-117.93700479999999],
+      userPos:[33.649459199999995,-117.93700479999999],
       locations: []
     };
     this.updateUserLocation();
@@ -136,6 +136,7 @@ export default class App extends Component<Props> {
                   sortCallback={()=>{}}
 
                   emergencyCallback={()=>{
+                      this.updateUserLocation();
                     let latlongs = [];
                     for(let i in this.state.locations){
                       latlongs.push({
