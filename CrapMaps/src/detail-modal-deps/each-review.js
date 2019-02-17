@@ -11,13 +11,15 @@ export default class EachReview extends Component {
         };
     }
 
+    const
+
     render() {
         return (
             <View style={{
                 width: "100%",
                 backgroundColor: '#B0BEC5',
                 flexDirection: "column",
-                height: "40%",
+                height: "15%",
                 justifyContent: "space-around",
                 alignItems: "center",
                 padding: 20
@@ -26,8 +28,6 @@ export default class EachReview extends Component {
                 <View style={{
                     alignItems: "center"
                 }}>
-                    <Text>NAME</Text>
-                    <Text>Address</Text>
                 </View>
                 <StarRating
                     disabled={true}
@@ -40,7 +40,7 @@ export default class EachReview extends Component {
                     selectedStar={() => {
                     }}
                     fullStarColor={'#FFF176'}
-                    starSize={30}
+                    starSize={10}
                     containerStyle={{justifyContent: "center"}}
                 />
 
@@ -48,7 +48,7 @@ export default class EachReview extends Component {
                     style={{
 
                     }}>
-                    <Text>{this.props.reviewText}</Text>
+                    <Text>Nice Text things</Text>
                 </View>
 
             </View>

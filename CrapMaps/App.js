@@ -114,7 +114,7 @@ export default class App extends Component<Props> {
                   sortCallback={()=>{}}
                   emergencyCallback={()=>{}}
                   addCallback={()=>{}}/> :
-                <EachReview/>}
+                <EachReview />}
 
             </View>
         );
