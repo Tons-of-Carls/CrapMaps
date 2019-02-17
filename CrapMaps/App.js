@@ -1,3 +1,6 @@
+import "firebase"
+import * as firebase from "firebase";
+
 import React, { Component } from 'react';
 import { AppRegistry, Text, View, TouchableWithoutFeedback, Button } from 'react-native';
 
@@ -7,38 +10,39 @@ import StarRating from 'react-native-star-rating';
 import CMButton from "./src/CMButton"
 import MenuBar from "./src/MenuBar"
 import MarkerData from "./src/MarkerData";
-import BathroomDataCollection from "./src/BathroomDataCollection"
+
 import DetailModal from "./src/DetailModal"
 
-import "firebase"
-import * as firebase from "firebase";
+
+let config = {
+  apiKey: "AIzaSyAu3t1RP8eCeDyLex1nUnOgLuxevRLC1Xc",
+  authDomain: "crapmapsfb.firebaseapp.com",
+  databaseURL: "https://crapmapsfb.firebaseio.com",
+  projectId: "crapmapsfb",
+  storageBucket: "crapmapsfb.appspot.com",
+  messagingSenderId: "181590936130"
+};
+firebase.initializeApp(config);
 
 export default class App extends Component<Props> {
 
   constructor(props){
     super(props)
     this.state = {
-      markerView:false,
-      inputView: false,
+      markerView:-1,
       currentPos:[0,0],
       locations: []
     };
     this.updateUserLocation();
 
-    let config = {
-      apiKey: "AIzaSyAu3t1RP8eCeDyLex1nUnOgLuxevRLC1Xc",
-      authDomain: "crapmapsfb.firebaseapp.com",
-      databaseURL: "https://crapmapsfb.firebaseio.com",
-      projectId: "crapmapsfb",
-      storageBucket: "crapmapsfb.appspot.com",
-      messagingSenderId: "181590936130"
-    };
-    firebase.initializeApp(config);
+
 
     firebase.database().ref("Locations/").once("value").then((snapshot)=>{
-      console.log();
       this.setState({locations: Object.values(snapshot.toJSON())})
-    })
+    });
+    firebase.database().ref("Locations/").on("value",  (snapshot)=> {
+      this.setState({locations: Object.values(snapshot.toJSON())})
+    });
   }
 
     updateUserLocation(){
@@ -91,30 +95,33 @@ export default class App extends Component<Props> {
                   }}
                   showsUserLocation={true}
                   onPress={(newCoords)=>{
-                    this.setState({markerView: false})
+                    this.setState({markerView: -1})
                   }}
               >
 
-                {this.state.locations.map((markerInfo)=>(
+                {this.state.locations.map((markerInfo, index)=>(
                   <Marker
                     coordinate={{
                       latitude: markerInfo.latitude,
                       longitude: markerInfo.longitude
                     }}
                     onPress={(event)=>{
-                      this.setState({markerView: true,currentPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
+                      this.setState({markerView: index,currentPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
                     }}
                   />
                 ))}
 
               </MapView>
 
-              {!this.state.markerView ?
+              {this.state.markerView === -1 ?
                 <MenuBar
                   sortCallback={()=>{}}
                   emergencyCallback={()=>{}}
                   addCallback={()=>{}}/> :
-                <MarkerData/>}
+                <MarkerData
+                  locationData={this.state.locations[this.state.markerView]}
+                  index={this.state.markerView}
+                />}
 
             </View>
         );

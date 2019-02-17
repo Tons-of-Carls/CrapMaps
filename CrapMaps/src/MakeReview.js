@@ -1,9 +1,13 @@
 import {Text, View, TextInput} from "react-native";
 import StarRating from "react-native-star-rating";
-
+import CMButton from "./CMButton"
 import React, { Component } from "react";
 
-export default class BathroomDataCollection extends Component{
+import * as firebase from "firebase";
+
+
+
+export default class MakeReview extends Component{
 
   constructor(props){
     super(props);
@@ -12,7 +16,7 @@ export default class BathroomDataCollection extends Component{
       location: [0,0],
       rating: 0,
       review: ""
-    }
+    };
     navigator.geolocation.getCurrentPosition((pos)=>{
       this.setState({location:[pos.coords.latitude, pos.coords.longitude]})
     })
@@ -33,14 +37,6 @@ export default class BathroomDataCollection extends Component{
         }}
       >
 
-        <TextInput
-          style={{flex: 1, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(val)=>{
-            this.setState({name: val});
-          }}
-          value={this.state.name}
-        />
-
         <StarRating
           disabled={false}
           emptyStar={'ios-star-outline'}
@@ -56,11 +52,30 @@ export default class BathroomDataCollection extends Component{
         />
 
         <TextInput
+          style={{width:"90%", borderBottomColor: "#78909C", borderBottomWidth: 1}}
           onChangeText={(val)=>{
             this.setState({review: val});
           }}
           value={this.state.review}
           multiline={true}
+        />
+
+        <CMButton
+          title="Submit"
+          verticallyAlone={false}
+          bgColor="#546E7A"
+          onPress={()=>{
+            firebase.database().ref("Locations/"+this.props.data.parent + "/reviews/" + String(this.props.index + 1)).set({
+              review: this.state.review,
+              stars: this.state.rating
+            });
+
+            let updates = {};
+            updates["Locations/"+this.props.data.parent+"/rating"] = (this.props.data.rating*this.props.data.size+this.state.rating)/(this.props.data.size+1);
+            updates["Locations/"+this.props.data.parent+"/size"] = this.props.data.size+1
+
+            firebase.database().ref().update(updates);
+          }}
         />
 
       </View>
