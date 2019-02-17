@@ -30,12 +30,15 @@ export default class App extends Component<Props> {
     super(props)
     this.state = {
       markerView:-1,
-      currentPos:[0,0],
+      viewPos:[0,0],
+      userPos:[0,0],
       locations: []
     };
     this.updateUserLocation();
 
-
+    navigator.geolocation.getCurrentPosition((pos)=>{
+      this.setState({viewPos:[pos.coords.latitude, pos.coords.longitude]})
+    })
 
     firebase.database().ref("Locations/").once("value").then((snapshot)=>{
       this.setState({locations: Object.values(snapshot.toJSON())})
@@ -47,28 +50,31 @@ export default class App extends Component<Props> {
 
     updateUserLocation(){
         navigator.geolocation.getCurrentPosition((pos)=>{
-            this.setState({currentPos:[pos.coords.latitude, pos.coords.longitude]})
+            this.setState({userPos:[pos.coords.latitude, pos.coords.longitude]})
         })
 
     }
 
-    findClosest(listo){
-
+    async findClosest(listo){
+      await this.updateUserLocation();
+        var index = 0;
         var i;
         var min = -1;
         var closest;
         for (i = 0; i < listo.length; i++) {
             if(min === -1){
-                min = App.haversine(this.state.currentPos[0], this.state.currentPos[1], listo[i].latitude, listo[i].longitude);
+                min = App.haversine(this.state.userPos[0], this.state.userPos[1], listo[i].latitude, listo[i].longitude);
                 closest = listo[i];
+                index = i;
             }else{
-                if(App.haversine(this.state.currentPos[0], this.state.currentPos[1], listo[i].latitude, listo[i].longitude) < min){
-                    min = App.haversine(this.state.currentPos[0], this.state.currentPos[1], listo[i].latitude, listo[i].longitude);
+                if(App.haversine(this.state.userPos[0], this.state.userPos[1], listo[i].latitude, listo[i].longitude) < min){
+                    min = App.haversine(this.state.userPos[0], this.state.userPos[1], listo[i].latitude, listo[i].longitude);
                     closest = listo[i];
+                    index = i;
                 }
             }
         }
-        return closest;
+        return index;
 
 
     }
@@ -88,8 +94,8 @@ export default class App extends Component<Props> {
               <MapView
                   style={{flex: 1}}
                   region={{
-                      latitude: this.state.currentPos[0],
-                      longitude: this.state.currentPos[1],
+                      latitude: this.state.viewPos[0],
+                      longitude: this.state.viewPos[1],
                       latitudeDelta: 0.004,
                       longitudeDelta: 0.004
                   }}
@@ -106,7 +112,7 @@ export default class App extends Component<Props> {
                       longitude: markerInfo.longitude
                     }}
                     onPress={(event)=>{
-                      this.setState({markerView: index,currentPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
+                      this.setState({markerView: index,viewPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
                     }}
                   />
                 ))}
@@ -116,7 +122,23 @@ export default class App extends Component<Props> {
               {this.state.markerView === -1 ?
                 <MenuBar
                   sortCallback={()=>{}}
-                  emergencyCallback={()=>{}}
+
+                  emergencyCallback={()=>{
+                    let latlongs = [];
+                    for(let i in this.state.locations){
+                      latlongs.push({
+                        latitude: this.state.locations[i].latitude,
+                        longitude: this.state.locations[i].longitude,
+                      })
+                    }
+
+                    this.findClosest(latlongs).then((index)=>{
+                      this.setState({markerView: index,viewPos:[latlongs[index].latitude, latlongs[index].longitude]})
+                    });
+
+
+
+                  }}
                   addCallback={()=>{}}/> :
                 <MarkerData
                   locationData={this.state.locations[this.state.markerView]}

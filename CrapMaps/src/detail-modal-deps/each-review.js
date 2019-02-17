@@ -18,7 +18,6 @@ export default class EachReview extends Component {
                 width: "100%",
                 backgroundColor: '#B0BEC5',
                 flexDirection: "column",
-                height: "15%",
                 // justifyContent: "space-around",
                 // alignItems: "center",
                 padding: 20
@@ -37,19 +36,19 @@ export default class EachReview extends Component {
                     halfStar={'ios-star-half'}
                     iconSet={'Ionicons'}
                     maxStars={5}
-                    rating={this.props.review.starCount}
+                    rating={this.props.review.stars}
                     selectedStar={() => {
                     }}
                     fullStarColor={'#FFF176'}
-                    starSize={10}
-                    containerStyle={{justifyContent: "center"}}
+                    starSize={20}
+                    containerStyle={{justifyContent: "flex-start"}}
                 />
 
                 <View
                     style={{
 
                     }}>
-                    <Text>{this.props.review.reviewText}</Text>
+                    <Text>{this.props.review.review}</Text>
                 </View>
 
             </View>
