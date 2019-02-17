@@ -16,6 +16,7 @@ export default class MarkerData extends Component{
       starCount: this.props.locationData.rating,
       mainView: true,
       reviewView: true,
+      pos: "relative"
     }
   }
 
@@ -63,11 +64,11 @@ export default class MarkerData extends Component{
             verticallyAlone={true}
             bgColor="#546E7A"
             onPress={()=>{
-              this.setState({mainView: false, reviewView: false})
+              this.setState({mainView: false, reviewView: false, pos: "absolute"})
             }}
           />
           <CMButton
-            title="Details"
+            title="Reviews"
             verticallyAlone={true}
             bgColor="#546E7A"
             onPress={()=>{
@@ -86,7 +87,7 @@ export default class MarkerData extends Component{
         style={{
           width: "100%",
           height: "40%",
-
+          position: this.state.pos
         }}
       >
         {this.state.mainView ? this.mainV() : (this.state.reviewView ? <ReviewList data={Object.values(this.props.locationData.reviews)}/> : <MakeReview closeCallback={this.props.closeCallback} index={Object.values(this.props.locationData.reviews).length} data={this.props.locationData}/> )}
