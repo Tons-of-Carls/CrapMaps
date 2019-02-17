@@ -77,8 +77,8 @@ export default class App extends Component<Props> {
     }
 
 
-
     render() {
+        const tester = {starCount: 2.5, reviewText: 'Nice Text things'};
         return (
             <View style={{width: "100%", height: "100%"}}>
               <MapView
@@ -114,7 +114,7 @@ export default class App extends Component<Props> {
                   sortCallback={()=>{}}
                   emergencyCallback={()=>{}}
                   addCallback={()=>{}}/> :
-                <EachReview />}
+                <EachReview review={tester}/>}
 
             </View>
         );

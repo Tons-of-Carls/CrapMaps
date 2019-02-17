@@ -11,7 +11,6 @@ export default class EachReview extends Component {
         };
     }
 
-    const
 
     render() {
         return (
@@ -20,13 +19,15 @@ export default class EachReview extends Component {
                 backgroundColor: '#B0BEC5',
                 flexDirection: "column",
                 height: "15%",
-                justifyContent: "space-around",
-                alignItems: "center",
+                // justifyContent: "space-around",
+                // alignItems: "center",
                 padding: 20
             }}>
 
                 <View style={{
-                    alignItems: "center"
+                    // alignItems: "",
+                    textAlign: "right",
+                    width: "25%"
                 }}>
                 </View>
                 <StarRating
@@ -36,7 +37,7 @@ export default class EachReview extends Component {
                     halfStar={'ios-star-half'}
                     iconSet={'Ionicons'}
                     maxStars={5}
-                    rating={this.props.starCount}
+                    rating={this.props.review.starCount}
                     selectedStar={() => {
                     }}
                     fullStarColor={'#FFF176'}
@@ -48,7 +49,7 @@ export default class EachReview extends Component {
                     style={{
 
                     }}>
-                    <Text>Nice Text things</Text>
+                    <Text>{this.props.review.reviewText}</Text>
                 </View>
 
             </View>
