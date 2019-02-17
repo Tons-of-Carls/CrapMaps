@@ -5,7 +5,7 @@ CrapMaps is an innovative application that will show you nearby restrooms and el
 
 ![Map](./map.jpg)  ![Deets](./fastdetails.jpg)  ![Review](./leavereview.jpg)
 
-### Main Features
+## Main Features
 
 * Real-time location awareness
 

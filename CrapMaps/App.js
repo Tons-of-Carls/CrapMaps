@@ -99,7 +99,7 @@ export default class App extends Component<Props> {
 
     render() {
       var toileticon = require('./splash.png');
-      //console.log(toileticon);
+      console.log(toileticon);
         return (
             <View style={{width: "100%", height: "100%"}}>
               <MapView
