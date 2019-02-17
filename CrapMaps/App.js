@@ -8,6 +8,7 @@ import CMButton from "./src/CMButton"
 import MenuBar from "./src/MenuBar"
 import MarkerData from "./src/MarkerData";
 import BathroomDataCollection from "./src/BathroomDataCollection"
+import DetailModal from "./src/DetailModal"
 
 import "firebase"
 import * as firebase from "firebase";

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import {Text, View} from "react-native";
+import {Text, View, StyleSheet} from "react-native";
+
 
 export default class DetailModal extends Component {
     constructor(props){
@@ -18,4 +19,12 @@ export default class DetailModal extends Component {
             
         );
     }
+
 }
+const styles = StyleSheet.create({
+    titleText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+    },
+});
+

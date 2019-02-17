@@ -2,12 +2,13 @@ import {Text, View} from "react-native";
 import StarRating from "react-native-star-rating";
 import CMButton from "./CMButton";
 import React, { Component } from "react";
+import DetailModal from './DetailModal';
 
 export default class MarkerData extends Component{
 
   constructor(props){
-    super(props)
-    this.state = {starCount: 2.2}
+    super(props);
+    this.state = {starCount: 2.2};
   }
 
   render(){
