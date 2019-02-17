@@ -111,7 +111,7 @@ export default class App extends Component<Props> {
                       latitude: markerInfo.latitude,
                       longitude: markerInfo.longitude
                     }}
-
+                    image={{url:"./assets/splash.png"}}
                     onPress={(event)=>{
                       this.setState({markerView: index,viewPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
                     }}

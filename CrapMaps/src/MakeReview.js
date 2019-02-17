@@ -1,4 +1,4 @@
-import {Text, View, TextInput} from "react-native";
+import {Text, View, TextInput, Alert} from "react-native";
 import StarRating from "react-native-star-rating";
 import CMButton from "./CMButton"
 import React, { Component } from "react";
@@ -76,6 +76,14 @@ export default class MakeReview extends Component{
               review: ""
             });
             this.props.closeCallback();
+            Alert.alert(
+              'Thank you for your feedback!',
+              '',
+              [
+                {text: 'OK', onPress: () => {}},
+              ],
+              {cancelable: false},
+            );
           }}
         />
 
