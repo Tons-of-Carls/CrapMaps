@@ -67,6 +67,7 @@ export default class MarkerData extends Component{
               this.setState({mainView: false, reviewView: false, pos: "absolute"})
             }}
           />
+          <View style={{width:"5%"}}/>
           <CMButton
             title="Reviews"
             verticallyAlone={true}
