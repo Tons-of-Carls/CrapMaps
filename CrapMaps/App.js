@@ -122,7 +122,7 @@ export default class App extends Component<Props> {
                       latitude: markerInfo.latitude,
                       longitude: markerInfo.longitude
                     }}
-                    image={require("./splash.png")}
+                    image={toileticon}
                     onPress={(event)=>{
                       this.setState({markerView: index,viewPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
                     }}
