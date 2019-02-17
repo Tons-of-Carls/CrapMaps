@@ -30,8 +30,8 @@ export default class App extends Component<Props> {
     super(props)
     this.state = {
       markerView:-1,
-      viewPos:[33.649459199999995,-117.93700479999999],
-      userPos:[33.649459199999995,-117.93700479999999],
+      viewPos:[33.64866,-117.8428],
+      userPos:[33.64866,-117.8428],
       locations: []
     };
     this.updateUserLocation();
@@ -122,6 +122,7 @@ export default class App extends Component<Props> {
                       latitude: markerInfo.latitude,
                       longitude: markerInfo.longitude
                     }}
+                    //image={require('./splash.png')}
                     image={toileticon}
                     onPress={(event)=>{
                       this.setState({markerView: index,viewPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
