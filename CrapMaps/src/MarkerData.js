@@ -56,7 +56,6 @@ export default class MarkerData extends Component{
             title="Details"
             verticallyAlone={true}
             bgColor="#546E7A"
-            onPress={}
           />
         </View>
 
