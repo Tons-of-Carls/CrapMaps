@@ -2,8 +2,11 @@ import {Text, View, KeyboardAvoidingView } from "react-native";
 import StarRating from "react-native-star-rating";
 import CMButton from "./CMButton";
 import React, { Component } from "react";
+
 import MakeReview from "./MakeReview";
 import ReviewList from "./ReviewList";
+
+import DetailModal from './DetailModal';
 
 export default class MarkerData extends Component{
 

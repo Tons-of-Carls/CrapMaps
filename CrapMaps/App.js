@@ -11,6 +11,8 @@ import CMButton from "./src/CMButton"
 import MenuBar from "./src/MenuBar"
 import MarkerData from "./src/MarkerData";
 
+import DetailModal from "./src/DetailModal"
+
 
 let config = {
   apiKey: "AIzaSyAu3t1RP8eCeDyLex1nUnOgLuxevRLC1Xc",
@@ -36,9 +38,11 @@ export default class App extends Component<Props> {
 
 
     firebase.database().ref("Locations/").once("value").then((snapshot)=>{
-      console.log();
       this.setState({locations: Object.values(snapshot.toJSON())})
-    })
+    });
+    firebase.database().ref("Locations/").on("value",  (snapshot)=> {
+      this.setState({locations: Object.values(snapshot.toJSON())})
+    });
   }
 
     updateUserLocation(){

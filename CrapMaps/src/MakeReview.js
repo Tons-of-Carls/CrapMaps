@@ -70,10 +70,11 @@ export default class MakeReview extends Component{
               stars: this.state.rating
             });
 
-            firebase.database().ref("Locations/"+this.props.data.parent).set({
-              rating: (this.props.data.rating*this.props.data.size+this.state.rating)/(this.props.data.size+1),
-              size: this.props.data.size+1
-            });
+            let updates = {};
+            updates["Locations/"+this.props.data.parent+"/rating"] = (this.props.data.rating*this.props.data.size+this.state.rating)/(this.props.data.size+1);
+            updates["Locations/"+this.props.data.parent+"/size"] = this.props.data.size+1
+
+            firebase.database().ref().update(updates);
           }}
         />
 
