@@ -2,7 +2,7 @@ import "firebase"
 import * as firebase from "firebase";
 
 import React, { Component } from 'react';
-import { AppRegistry, Text, View, TouchableWithoutFeedback, Button, Image } from 'react-native';
+import { AppRegistry, Text, View, TouchableWithoutFeedback, Button, Image, BackHandler } from 'react-native';
 
 import MapView,{Marker} from 'react-native-maps'
 import StarRating from 'react-native-star-rating';
@@ -36,7 +36,16 @@ export default class App extends Component<Props> {
     };
     this.updateUserLocation();
 
-    navigator.geolocation.getCurrentPosition((pos)=>{
+      BackHandler.addEventListener('hardwareBackPress', ()=> {
+
+          this.setState({markerView: -1});
+
+          return true;
+
+      });
+
+
+      navigator.geolocation.getCurrentPosition((pos)=>{
       this.setState({viewPos:[pos.coords.latitude, pos.coords.longitude]})
     });
 
@@ -90,7 +99,7 @@ export default class App extends Component<Props> {
 
     render() {
       var toileticon = require('./splash.png');
-      console.log(toileticon);
+      //console.log(toileticon);
         return (
             <View style={{width: "100%", height: "100%"}}>
               <MapView
