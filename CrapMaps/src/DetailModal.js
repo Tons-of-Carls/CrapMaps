@@ -10,8 +10,8 @@ export default class DetailModal extends Component {
     }
 
     render() {
-        return (
-            
-        );
+        // return (
+        //
+        // );
     }
 }

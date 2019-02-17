@@ -11,6 +11,7 @@ import BathroomDataCollection from "./src/BathroomDataCollection"
 
 import "firebase"
 import * as firebase from "firebase";
+import EachReview from "./src/detail-modal-deps/each-review";
 
 export default class App extends Component<Props> {
 
@@ -113,7 +114,7 @@ export default class App extends Component<Props> {
                   sortCallback={()=>{}}
                   emergencyCallback={()=>{}}
                   addCallback={()=>{}}/> :
-                <MarkerData/>}
+                <EachReview/>}
 
             </View>
         );
