@@ -7,7 +7,7 @@ import StarRating from 'react-native-star-rating';
 import CMButton from "./src/CMButton"
 import MenuBar from "./src/MenuBar"
 import MarkerData from "./src/MarkerData";
-import BathroomDataCollection from "./src/BathroomDataCollection"
+
 
 import "firebase"
 import * as firebase from "firebase";
@@ -17,8 +17,7 @@ export default class App extends Component<Props> {
   constructor(props){
     super(props)
     this.state = {
-      markerView:false,
-      inputView: false,
+      markerView:-1,
       currentPos:[0,0],
       locations: []
     };
@@ -90,30 +89,32 @@ export default class App extends Component<Props> {
                   }}
                   showsUserLocation={true}
                   onPress={(newCoords)=>{
-                    this.setState({markerView: false})
+                    this.setState({markerView: -1})
                   }}
               >
 
-                {this.state.locations.map((markerInfo)=>(
+                {this.state.locations.map((markerInfo, index)=>(
                   <Marker
                     coordinate={{
                       latitude: markerInfo.latitude,
                       longitude: markerInfo.longitude
                     }}
                     onPress={(event)=>{
-                      this.setState({markerView: true,currentPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
+                      this.setState({markerView: index,currentPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
                     }}
                   />
                 ))}
 
               </MapView>
 
-              {!this.state.markerView ?
+              {this.state.markerView === -1 ?
                 <MenuBar
                   sortCallback={()=>{}}
                   emergencyCallback={()=>{}}
                   addCallback={()=>{}}/> :
-                <MarkerData/>}
+                <MarkerData
+                  locationData={this.state.locations[this.state.markerView]}
+                />}
 
             </View>
         );

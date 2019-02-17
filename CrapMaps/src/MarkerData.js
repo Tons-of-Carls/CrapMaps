@@ -2,45 +2,51 @@ import {Text, View} from "react-native";
 import StarRating from "react-native-star-rating";
 import CMButton from "./CMButton";
 import React, { Component } from "react";
+import MakeReview from "./MakeReview";
+import ReviewList from "./ReviewList";
 
 export default class MarkerData extends Component{
 
   constructor(props){
-    super(props)
-    this.state = {starCount: 2.2}
+    super(props);
+    this.state = {
+      starCount: 2.2,
+      mainView: true,
+      reviewView: false,
+    }
   }
 
-  render(){
+  mainV(){
     return (
       <View style={{
-      width: "100%",
-      backgroundColor: '#B0BEC5',
-      flexDirection: "column",
-      height: "40%",
-      justifyContent:"space-around",
-      alignItems:"center",
-      padding:20
-    }}>
-
-      <View style={{
-        alignItems:"center"
+        width: "100%",
+        backgroundColor: '#B0BEC5',
+        flexDirection: "column",
+        height: "40%",
+        justifyContent:"space-around",
+        alignItems:"center",
+        padding:20
       }}>
-        <Text>NAME</Text>
-        <Text>Address</Text>
-      </View>
-      <StarRating
-        disabled={true}
-        emptyStar={'ios-star-outline'}
-        fullStar={'ios-star'}
-        halfStar={'ios-star-half'}
-        iconSet={'Ionicons'}
-        maxStars={5}
-        rating={this.state.starCount}
-        selectedStar={() => {}}
-        fullStarColor={'#FFF176'}
-        starSize={30}
-        containerStyle={{justifyContent: "center"}}
-      />
+
+        <View style={{
+          alignItems:"center"
+        }}>
+          <Text>NAME</Text>
+          <Text>Address</Text>
+        </View>
+        <StarRating
+          disabled={true}
+          emptyStar={'ios-star-outline'}
+          fullStar={'ios-star'}
+          halfStar={'ios-star-half'}
+          iconSet={'Ionicons'}
+          maxStars={5}
+          rating={this.state.starCount}
+          selectedStar={() => {}}
+          fullStarColor={'#FFF176'}
+          starSize={30}
+          containerStyle={{justifyContent: "center"}}
+        />
 
         <View
           style={{
@@ -51,6 +57,9 @@ export default class MarkerData extends Component{
             title="Add review"
             verticallyAlone={true}
             bgColor="#546E7A"
+            onPress={()=>{
+
+            }}
           />
           <CMButton
             title="Details"
@@ -59,7 +68,13 @@ export default class MarkerData extends Component{
           />
         </View>
 
-    </View>
+      </View>
+    )
+  }
+
+  render(){
+    return (
+      {this.state.mainView ? this.mainV() : }
     )
   }
 }

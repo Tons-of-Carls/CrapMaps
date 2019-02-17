@@ -3,7 +3,7 @@ import StarRating from "react-native-star-rating";
 
 import React, { Component } from "react";
 
-export default class BathroomDataCollection extends Component{
+export default class MakeReview extends Component{
 
   constructor(props){
     super(props);
@@ -32,14 +32,6 @@ export default class BathroomDataCollection extends Component{
           padding:20
         }}
       >
-
-        <TextInput
-          style={{flex: 1, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={(val)=>{
-            this.setState({name: val});
-          }}
-          value={this.state.name}
-        />
 
         <StarRating
           disabled={false}
