@@ -2,7 +2,7 @@ import "firebase"
 import * as firebase from "firebase";
 
 import React, { Component } from 'react';
-import { AppRegistry, Text, View, TouchableWithoutFeedback, Button } from 'react-native';
+import { AppRegistry, Text, View, TouchableWithoutFeedback, Button, Image } from 'react-native';
 
 import MapView,{Marker} from 'react-native-maps'
 import StarRating from 'react-native-star-rating';
@@ -38,7 +38,7 @@ export default class App extends Component<Props> {
 
     navigator.geolocation.getCurrentPosition((pos)=>{
       this.setState({viewPos:[pos.coords.latitude, pos.coords.longitude]})
-    })
+    });
 
     firebase.database().ref("Locations/").once("value").then((snapshot)=>{
       this.setState({locations: Object.values(snapshot.toJSON())})
@@ -89,6 +89,8 @@ export default class App extends Component<Props> {
 
 
     render() {
+      var toileticon = require('./splash.png');
+      console.log(toileticon);
         return (
             <View style={{width: "100%", height: "100%"}}>
               <MapView
@@ -111,6 +113,7 @@ export default class App extends Component<Props> {
                       latitude: markerInfo.latitude,
                       longitude: markerInfo.longitude
                     }}
+                    image={require("./splash.png")}
                     onPress={(event)=>{
                       this.setState({markerView: index,viewPos:[event.nativeEvent.coordinate.latitude, event.nativeEvent.coordinate.longitude]})
                     }}
