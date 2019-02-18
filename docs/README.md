@@ -1,4 +1,8 @@
 # Welcome to CrapMaps
+
+## Awards
+Hack UCI 2019 - Best Joke Hack
+
 ## Change Your Life, Not Your Pants
 CrapMaps is an innovative application that will show you nearby restrooms and eliminate the last minute panic of finding somewhere to relieve yourself.
 
